@@ -30,7 +30,7 @@
 int
 MALI_GLES_LoadLibrary(_THIS, const char *path)
 {
-    return SDL_EGL_LoadLibrary(_this, path, EGL_DEFAULT_DISPLAY);
+    return SDL_EGL_LoadLibrary(_this, path, EGL_DEFAULT_DISPLAY,0);
 }
 
 SDL_EGL_CreateContext_impl(MALI)

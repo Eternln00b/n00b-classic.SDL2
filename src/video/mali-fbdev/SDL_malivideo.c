@@ -78,7 +78,7 @@ MALI_Create()
     device->VideoQuit = MALI_VideoQuit;
     device->GetDisplayModes = MALI_GetDisplayModes;
     device->SetDisplayMode = MALI_SetDisplayMode;
-    device->CreateWindow = MALI_CreateWindow;
+    device->CreateSDLWindow = MALI_CreateWindow;
     device->SetWindowTitle = MALI_SetWindowTitle;
     device->SetWindowPosition = MALI_SetWindowPosition;
     device->SetWindowSize = MALI_SetWindowSize;
@@ -120,16 +120,19 @@ MALI_VideoInit(_THIS)
     SDL_DisplayMode current_mode;
     SDL_DisplayData *data;
 
+    int fd;
+    struct fb_var_screeninfo vinfo;
+
     data = (SDL_DisplayData *) SDL_calloc(1, sizeof(SDL_DisplayData));
     if (data == NULL) {
         return SDL_OutOfMemory();
     }
 
-    int fd = open("/dev/fb0", O_RDWR, 0);
+    open("/dev/fb0", O_RDWR, 0);
     if (fd < 0) {
         return SDL_SetError("mali-fbdev: Could not open framebuffer device");
     }
-    struct fb_var_screeninfo vinfo;
+
     if (ioctl(fd, FBIOGET_VSCREENINFO, &vinfo) < 0) {
         MALI_VideoQuit(_this);
         return SDL_SetError("mali-fbdev: Could not get framebuffer information");
