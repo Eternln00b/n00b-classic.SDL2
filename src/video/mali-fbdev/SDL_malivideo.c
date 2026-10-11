@@ -120,7 +120,7 @@ MALI_VideoInit(_THIS)
     SDL_DisplayMode current_mode;
     SDL_DisplayData *data;
 
-    int fd;
+    int fd = -1;
     struct fb_var_screeninfo vinfo;
 
     data = (SDL_DisplayData *) SDL_calloc(1, sizeof(SDL_DisplayData));
@@ -128,7 +128,7 @@ MALI_VideoInit(_THIS)
         return SDL_OutOfMemory();
     }
 
-    open("/dev/fb0", O_RDWR, 0);
+    fd = open("/dev/fb0", O_RDWR, 0);
     if (fd < 0) {
         return SDL_SetError("mali-fbdev: Could not open framebuffer device");
     }
@@ -156,8 +156,8 @@ MALI_VideoInit(_THIS)
     /* FIXME: Is there a way to tell the actual refresh rate? */
     current_mode.refresh_rate = 60;
     /* 32 bpp for default */
-    //current_mode.format = SDL_PIXELFORMAT_ABGR8888;
-    current_mode.format = SDL_PIXELFORMAT_RGBX8888;
+    current_mode.format = SDL_PIXELFORMAT_ABGR8888;
+    //current_mode.format = SDL_PIXELFORMAT_RGBX8888;
 
     current_mode.driverdata = NULL;
 
