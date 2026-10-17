@@ -37,13 +37,6 @@
 #include "SDL_malivideo.h"
 #include "SDL_maliopengles.h"
 
-
-static int
-MALI_Available(void)
-{
-    return 1;
-}
-
 static void
 MALI_Destroy(SDL_VideoDevice * device)
 {
@@ -105,7 +98,6 @@ MALI_Create()
 VideoBootStrap MALI_bootstrap = {
     "mali",
     "Mali EGL Video Driver",
-    MALI_Available,
     MALI_Create
 };
 
@@ -166,7 +158,7 @@ MALI_VideoInit(_THIS)
     display.current_mode = current_mode;
     display.driverdata = data;
 
-    SDL_AddVideoDisplay(&display);
+    SDL_AddVideoDisplay(&display, SDL_TRUE);
 
 #ifdef SDL_INPUT_LINUXEV
     if (SDL_EVDEV_Init() < 0) {
