@@ -19,3 +19,10 @@ with README.md
 
 Enjoy!
 	Sam Lantinga				(slouken@libsdl.org)
+
+======================================================================================================================================================================
+
+This repository is based on [libsdl2-2.0.2-dfsg1](https://github.com/mihailescu2m/libsdl2-2.0.2-dfsg1). It has been updated to the version SDL2.0.8. 
+The goal behind this project is to unleash the real potential of the Mali-400MP2. 
+
+If your SBC has a Mali GPU, my project could be compatible with it but without warranty. If there's something screwed up, you have to fix it yourself. 
